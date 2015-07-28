@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeProject;
+namespace CodeProject\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +11,7 @@ class Client extends Model
         'responsible',
         'email',
         'phone',
-        'adress',
+        'address',
         'obs'
     ];
 }

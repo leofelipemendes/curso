@@ -2,7 +2,9 @@
 
 namespace CodeProject\Http\Controllers;
 
-use CodeProject\Client;
+use CodeProject\Entities\Client;
+use CodeProject\Repositories\ClientRepository;
+use CodeProject\Repositories\ClientRepositoryEloquent;
 use Illuminate\Http\Request;
 
 use CodeProject\Http\Requests;
@@ -11,13 +13,25 @@ use CodeProject\Http\Controllers\Controller;
 class ClientController extends Controller
 {
     /**
+     * @var ClientRepository
+     */
+    private $rep;
+
+    public function __construct(ClientRepository $repository)
+    {
+        $this->rep = $repository;
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return Response
      */
+
+
     public function index()
     {
-        return Client::all();
+        return $this->rep->all();
     }
 
     /**
@@ -38,7 +52,8 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        return Client::create($request->all());
+        return $this->rep->create($request->all());
+
     }
 
     /**
@@ -49,7 +64,7 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        return Client::find($id);
+        return $this->rep->find($id);
     }
 
     /**
@@ -72,13 +87,14 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cli = Client::find($id);
+
+        $cli = $this->rep->find($id);
         $request = $request->all();
         $cli->name = $request['name'];
         $cli->responsible = $request['responsible'];
         $cli->email = $request['email'];
         $cli->phone = $request['phone'];
-        $cli->adress = $request['adress'];
+        $cli->address = $request['address'];
         $cli->obs = $request['obs'];
         if($cli->save()){
             return "Client updated successfully";

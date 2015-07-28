@@ -19,7 +19,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Authentication Model
+    | Authentication Entities
     |--------------------------------------------------------------------------
     |
     | When using the "Eloquent" authentication driver, we need to know which
@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => CodeProject\User::class,
+    'model' => CodeProject\Entities\User::class,
 
     /*
     |--------------------------------------------------------------------------
