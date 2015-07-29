@@ -18,7 +18,7 @@ class CreateClientsTable extends Migration
             $table->string('responsible');
             $table->string('email');
             $table->string('phone');
-            $table->text('adress');
+            $table->text('address');
             $table->text('obs');
             $table->timestamps();
         });
