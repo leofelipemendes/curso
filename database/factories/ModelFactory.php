@@ -26,7 +26,7 @@ $factory->define(CodeProject\Entities\Client::class, function (Faker\Generator $
         'responsible' => $faker->name,
         'email' => $faker->email,
         'phone' => $faker->phoneNumber ,
-        'adress' => $faker->address,
+        'address' => $faker->address,
         'obs' => $faker->sentence(),
 
     ];
