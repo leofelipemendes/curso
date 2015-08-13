@@ -45,7 +45,7 @@ class ClientServices
         }catch (ValidatorException $e){
             return [
                 'error'=> true,
-                'message' => $e->getMessage()
+                'message' => $e->getMessageBag()
             ];
         }
 
@@ -60,7 +60,7 @@ class ClientServices
         }catch (ValidatorException $e){
             return [
                 'error'=> true,
-                'message' => $e->getMessage()
+                'message' => $e->getMessageBag()
             ];
         }
     }

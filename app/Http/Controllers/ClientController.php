@@ -5,6 +5,7 @@ namespace CodeProject\Http\Controllers;
 use CodeProject\Entities\Client;
 use CodeProject\Repositories\ClientRepository;
 use CodeProject\Repositories\ClientRepositoryEloquent;
+use CodeProject\Services\ClientServices;
 use Illuminate\Http\Request;
 
 use CodeProject\Http\Requests;
@@ -16,10 +17,12 @@ class ClientController extends Controller
      * @var ClientRepository
      */
     private $rep;
+    private $service;
 
-    public function __construct(ClientRepository $repository)
+    public function __construct(ClientRepository $repository,ClientServices $service)
     {
         $this->rep = $repository;
+        $this->service = $service;
     }
 
     /**
@@ -52,7 +55,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->rep->create($request->all());
+        return $this->service->create($request->all());
 
     }
 
@@ -87,20 +90,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $cli = $this->rep->find($id);
-        $request = $request->all();
-        $cli->name = $request['name'];
-        $cli->responsible = $request['responsible'];
-        $cli->email = $request['email'];
-        $cli->phone = $request['phone'];
-        $cli->address = $request['address'];
-        $cli->obs = $request['obs'];
-        if($cli->save()){
-            return "Client updated successfully";
-        }
-        return "oh oh !!! Something is wrong in you data!";
-
+        $cli = $this->service->update($request->all(),$id);
     }
 
     /**
@@ -111,7 +101,7 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        $cli = Client::destroy($id);
+        return $this->rep->delete($id);
 
     }
 }
