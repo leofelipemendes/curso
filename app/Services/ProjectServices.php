@@ -2,29 +2,29 @@
 /**
  * Created by PhpStorm.
  * User: Leo
- * Date: 01/08/2015
- * Time: 23:04
+ * Date: 14/08/2015
+ * Time: 21:59
  */
 
 namespace CodeProject\Services;
 
 
-use CodeProject\Repositories\ClientRepository;
-use CodeProject\Validators\ClientValidator;
+use CodeProject\Repositories\ProjectRepository;
+use CodeProject\Validators\ProjectValidator;
 use Prettus\Validator\Exceptions\ValidatorException;
 
-class ClientServices
+class ProjectServices
 {
     /**
-     * @var ClientRepository
+     * @var ProjectRepository
      */
     private $repository;
     /**
-     * @var ClientValidator
+     * @var ProjectValidator
      */
     private $validator;
 
-    public function __construct(ClientRepository $repository,ClientValidator $validator)
+    public function __construct(ProjectRepository $repository,ProjectValidator $validator)
     {
         $this->repository = $repository;
         $this->validator = $validator;
@@ -52,6 +52,7 @@ class ClientServices
 
     }
 
+
     public function update(array $data,$id)
     {
         try{
@@ -64,5 +65,6 @@ class ClientServices
             ];
         }
     }
+
 
 }
