@@ -9,6 +9,7 @@ use Prettus\Repository\Traits\TransformableTrait;
 class Project extends Model implements Transformable
 {
     use TransformableTrait;
+
     protected $fillable = array(
         'owner_id',
         'client_id',
@@ -18,4 +19,14 @@ class Project extends Model implements Transformable
         'status',
         'due_date'
     );
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 }
