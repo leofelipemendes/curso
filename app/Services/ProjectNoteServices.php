@@ -2,30 +2,30 @@
 /**
  * Created by PhpStorm.
  * User: Leo
- * Date: 01/08/2015
- * Time: 23:04
+ * Date: 14/08/2015
+ * Time: 21:59
  */
 
 namespace CodeProject\Services;
 
 
-use CodeProject\Repositories\ClientRepository;
-use CodeProject\Validators\ClientValidator;
+use CodeProject\Repositories\ProjectNoteRepository;
+use CodeProject\Validators\ProjectNoteValidator;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class ClientServices
+class ProjectNoteServices
 {
     /**
-     * @var ClientRepository
+     * @var ProjectNoteRepository
      */
     private $repository;
     /**
-     * @var ClientValidator
+     * @var ProjectNoteValidator
      */
     private $validator;
 
-    public function __construct(ClientRepository $repository,ClientValidator $validator)
+    public function __construct(ProjectNoteRepository $repository,ProjectNoteValidator $validator)
     {
         $this->repository = $repository;
         $this->validator = $validator;
@@ -50,20 +50,9 @@ class ClientServices
             ];
         }
 
+
     }
 
-    public function show($id){
-        try{
-            return [
-                "success" => $this->repository->find($id)
-            ];
-        } catch(ModelNotFoundException $e) {
-            return [
-                "success" => false,
-                "message" => "Projeto ID: {$id} inexistente!"
-            ];
-        }
-    }
 
     public function update(array $data,$id)
     {
@@ -78,17 +67,5 @@ class ClientServices
         }
     }
 
-    public function delete($id)
-    {
-        try
-        {
-            return ["success" => $this->repository->delete($id)];
-        } catch(ModelNotFoundException $e){
-            return [
-                'success' => false,
-                'message' => 'Cliente não encontrado!',
-            ];
-        }
-    }
 
 }

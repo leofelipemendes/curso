@@ -2,51 +2,51 @@
 
 namespace CodeProject\Http\Controllers;
 
-use CodeProject\Entities\Client;
-use CodeProject\Repositories\ClientRepository;
-use CodeProject\Repositories\ClientRepositoryEloquent;
-use CodeProject\Services\ClientServices;
+use CodeProject\Repositories\ProjectNoteRepository;
+use CodeProject\Services\ProjectNoteServices;
 use Illuminate\Http\Request;
-
 use CodeProject\Http\Requests;
-use CodeProject\Http\Controllers\Controller;
 
-class ClientController extends Controller
+
+class ProjectNoteController extends Controller
 {
+
     /**
-     * @var ClientRepository
+     * @var ProjectNoteRepository
      */
     private $rep;
+
+    /**
+     * @var ProjectNoteServices
+     */
     private $service;
 
-    public function __construct(ClientRepository $repository,ClientServices $service)
+    public function __construct(ProjectNoteRepository $repository,ProjectNoteServices $service)
     {
         $this->rep = $repository;
         $this->service = $service;
     }
-
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-
-
-    public function index()
+    public function index($id)
     {
-        return $this->rep->all();
+        return $this->rep->findWhere(['project_id' => $id]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @param Request $request
      * @return Response
-
-    public function create()
-    {
-        //
-    }
      */
+    public function create(Request $request)
+    {
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -56,7 +56,6 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         return $this->service->create($request->all());
-
     }
 
     /**
@@ -65,9 +64,9 @@ class ClientController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show($id,$noteid)
     {
-        return $this->service->show($id);
+        return $this->rep->findWhere(['project_id' => $id,'id' => $noteid]);
     }
 
     /**
@@ -75,11 +74,11 @@ class ClientController extends Controller
      *
      * @param  int  $id
      * @return Response
-
+     */
     public function edit($id)
     {
         //
-    }*/
+    }
 
     /**
      * Update the specified resource in storage.
@@ -101,7 +100,6 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        return $this->service->delete($id);
-
+        return $this->rep->delete($id);
     }
 }

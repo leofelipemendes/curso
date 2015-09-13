@@ -63,8 +63,9 @@ class ProjectController extends Controller
      * @return Response
      */
     public function show($id)
+
     {
-        return $this->rep->with(['owner', 'client'])->find($id);
+            return $this->service->show($id);
     }
 
     /**
@@ -98,6 +99,6 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        return $this->rep->delete($id);
+        return $this->service->destroy($id);
     }
 }
